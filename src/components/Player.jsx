@@ -25,14 +25,7 @@ export default function Player({ initialName, symbol }) {
       <input type="text" required value={playerName} onChange={handleChange} />
     );
   }
-  console.log(
-    "isEditing",
-    isEditing,
-    "Player rendered",
-    playerName,
-    "initialName",
-    initialName
-  );
+
   return (
     <li>
       <span className="player">

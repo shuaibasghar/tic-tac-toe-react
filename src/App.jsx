@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
 
 function App() {
@@ -8,6 +10,7 @@ function App() {
           <Player initialName={"Player1"} symbol={"X"} />
           <Player initialName={"Player2"} symbol={"O"} />
         </ol>
+        <GameBoard />
       </div>
     </main>
   );
