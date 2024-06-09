@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}) {
   let [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -11,6 +16,9 @@ export default function Player({ initialName, symbol, isActive }) {
     // alway use functionin setState when you are updating the state based on the previous state
     // because function has current state as a parameter and it will always give you the latest state
     setIsEditing((editing) => !editing);
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   //on change will be triggered on every key stroke
