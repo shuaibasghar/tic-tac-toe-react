@@ -8,7 +8,8 @@ const initialGameBoard = [
 ];
 /**
  important note
- 
+ import GameBoard from './GameBoard';
+
  UPdate the object-state immutably
 
  Object and array (which are technically are objects) are reference values in JavaScript
@@ -23,22 +24,34 @@ const initialGameBoard = [
  */
 
 // Define the GameBoard component
-export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  function handleSelectSquare(rowIndex, colIndex) {
-    // console.log(rowIndex, colIndex);
-    setGameBoard((prevGameBoard) => {
-      // prevGameBoard[rowIndex][colIndex] = "X"; // this is mutating the state directly not a good practice
-      const updatedBoard = [
-        ...prevGameBoard.map((innerArray) => [...innerArray]),
-      ];
-      console.log(updatedBoard);
-      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
+export default function GameBoard({
+  onSelectSquare,
+  turns,
+  activePlayerSymbol,
+}) {
+  let gameBoard = initialGameBoard;
 
-      return updatedBoard;
-    });
-    onSelectSquare();
+  for (const turn of turns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
   }
+
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+  // function handleSelectSquare(rowIndex, colIndex) {
+  //   // console.log(rowIndex, colIndex);
+  //   setGameBoard((prevGameBoard) => {
+  //     // prevGameBoard[rowIndex][colIndex] = "X"; // this is mutating the state directly not a good practice
+  //     const updatedBoard = [
+  //       ...prevGameBoard.map((innerArray) => [...innerArray]),
+  //     ];
+  //     console.log(updatedBoard);
+  //     updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
+
+  //     return updatedBoard;
+  //   });
+  //   onSelectSquare();
+  // }
   return (
     // Render an ordered list with the id "game-board"
     <ol id="game-board">
@@ -49,7 +62,8 @@ export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => handleSelectSquare(rowIndex, colIndex)}>
+                {/* <button onClick={() => handleSelectSquare(rowIndex, colIndex)}> */}
+                <button onClick={() => onSelectSquare(rowIndex, colIndex)}>
                   {playerSymbol}
                 </button>
               </li>
