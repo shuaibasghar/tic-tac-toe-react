@@ -1,11 +1,11 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 // Define the initial state of the game board as a 3x3 grid filled with null values
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+// const initialGameBoard = [
+//   [null, null, null],
+//   [null, null, null],
+//   [null, null, null],
+// ];
 /**
  important note
  import GameBoard from './GameBoard';
@@ -28,14 +28,15 @@ export default function GameBoard({
   onSelectSquare,
   turns,
   activePlayerSymbol,
+  board,
 }) {
-  let gameBoard = initialGameBoard;
+  // let gameBoard = initialGameBoard;
 
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
+  // for (const turn of turns) {
+  //   const { square, player } = turn;
+  //   const { row, col } = square;
+  //   gameBoard[row][col] = player;
+  // }
 
   // const [gameBoard, setGameBoard] = useState(initialGameBoard);
   // function handleSelectSquare(rowIndex, colIndex) {
@@ -56,7 +57,7 @@ export default function GameBoard({
     // Render an ordered list with the id "game-board"
     <ol id="game-board">
       {/* Map over each row in the game board */}
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           {/* Map over each square in the row */}
           <ol>
