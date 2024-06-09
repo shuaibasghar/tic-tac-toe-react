@@ -15,10 +15,15 @@ const initialGameBoard = [
 
  You should therefore not mutate them directly-- instead create a deep copy first and then update the copy
 
+
+ // lifting state up
+
+ Lift the state up to the closest ancestor component that has access to all components that need to work with that state
+-- in this case the app-component is the closest ancestor component that has access to both the Player and GameBoard components
  */
 
 // Define the GameBoard component
-export default function GameBoard() {
+export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
   function handleSelectSquare(rowIndex, colIndex) {
     // console.log(rowIndex, colIndex);
@@ -28,10 +33,11 @@ export default function GameBoard() {
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
       console.log(updatedBoard);
-      updatedBoard[rowIndex][colIndex] = "X";
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
 
       return updatedBoard;
     });
+    onSelectSquare();
   }
   return (
     // Render an ordered list with the id "game-board"
